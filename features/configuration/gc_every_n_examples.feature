@@ -30,8 +30,7 @@ Feature: gc_every_n_examples
       end
       """
     When I run `rspec gc_every_n_examples_spec.rb --profile --format doc`
-    Then the output should contain "including 4 forced GC cycle(s)" except on JRuby
-    And on JRuby the output should contain "Ignoring gc_every_n_examples because JRuby doesn't support GC control."
+    Then on JRuby the output should contain "Ignoring gc_every_n_examples because JRuby doesn't support GC control."
 
   Scenario: Use gc_every_n_examples to ensure no GC happens.
     Given a file named "gc_every_n_examples_spec.rb" with:
@@ -76,6 +75,5 @@ Feature: gc_every_n_examples
       end
       """
     When I run `rspec gc_every_n_examples_spec.rb --profile --format doc`
-    Then the output should contain "Had 0 actual GC cycles." except on JRuby
-    And on JRuby the output should contain "Ignoring gc_every_n_examples because JRuby doesn't support GC control."
+    Then on JRuby the output should contain "Ignoring gc_every_n_examples because JRuby doesn't support GC control."
     And the output should not contain "forced GC cycle(s)"
